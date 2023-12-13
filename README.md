@@ -1,59 +1,51 @@
 # Zetta Technical Interview Task - QA Engineer
 
-## Selenium Java Project: Christmas Shopping Test
+## Crawler Python Project: Rudolph the crawler test
 
-This project is a Selenium WebDriver test script written in Java, designed to automate the process of adding laptops to a shopping cart on Amazon. It demonstrates the use of Selenium for web automation, along with TestNG for organizing tests.
+This project is Scrapy with Selenium, designed to crawl on amazon.com and check if all category links under Shop by Department are working.
 
 ### Prerequisites
 
 To run this project, you need the following:
 
-- Java JDK (Java 20 is used in this project)
-- Maven (for managing dependencies and project build)
-- Chrome web browser (for running the test)
+- Python 3.x** (Python 3.9.6 is used in this project)
+- Scrapy (The web scraping framework)
+- Selenium (Used to help scrappy interact with dynamic content)
+- Chrome web browser (for running the crawler)
 
-### Project Structure
+### Important Project Files
 
-- `pom.xml`: Maven Project Object Model file, which contains project configuration including dependencies such as Selenium WebDriver, WebDriverManager, and TestNG.
-- `src`: Source folder containing the test script.
-
-### Dependencies
-
-- Selenium WebDriver `4.16.1` for browser automation.
-- WebDriverManager `5.6.2` automatically manages WebDriver binaries.
-- TestNG `7.8.0` for organizing and running tests.
+- `crawler_python/settings.py`: Where all the Scrapy settings are stored
+- `crawler_python/crawler_python/spiders`: Where the web crawlers are created (e.g. rudolph_crawler.py)
 
 ### Setting Up the Project
 
-1. **Install Java**: Ensure Java JDK 20 is installed on your system. You can download it from [Oracle's website](https://www.oracle.com/java/technologies/javase/jdk20-archive-downloads.html).
+1. **Install Python**: Ensure latest Python is installed on your system. You can download it from [Python's website](https://www.python.org/downloads/).
 
-2. **Install Maven**: If Maven is not installed, download and install it from [Maven's official website](https://maven.apache.org/download.cgi).
-
+2. **Install Python requirements**: Install Scrapy and SElenium using
+```
+pip install -r requirements.txt
+```
 4. **Install Chrome**: If needed, you can download it from [Chrome's website](www.google.com/chrome).
 
 3. **Clone the Repository**: Clone this project to your local machine.
 
-### Running the Test
+### Running the crawler
 
-To run the test:
+To run the crawler:
 
-1. Navigate to the project directory in your terminal or command prompt.
+1. Navigate to crawler_python/crawler_python in your terminal or command prompt.
 
-2. Run the command `mvn test`. This command will compile the project and execute the test in headed mode.
+2. Run the command `scrapy crawl rudolph_crawler`. This command will run the crawler in headed mode.
 
-### Test Steps for `ChristmasShoppingTest.java`
+### Overview of `rudolph_crawler.pu`
 
-- Goes to amazon.com
-- Search for keyword "laptop"
-- Add all non-discounted items to cart from the first page of results
-- Check on product page if item is in stock and verify item is not discounted
-- Count the amount of items added to cart and items skipped
-- Check the added amount of items to cart, matches the items in the cart
-- Check the items added and items skipped match the total items that should be on the first page of results
-- Check the items in cart are still in stock
+- Goes to amazon.com, but amazon blocks crawlers so we fake the user-agent with a real looking one
+- Amazon is a dynamic website and the crawler can't do anything alone, so we needed the help or some UI framework like Selenium
+- We use selenium to click through the menus, so that the needed menus will load in the DOM
+- So far so good, but scrapy was never able to catch the links that I wanted
+- Scrapy fails his duties
 
 ### Notes
 
-Because the items on the page change with each search, the page is not refreshed until the last item is added. New tabs are used for each item being added to the cart.
-
-The total number of valid items is calculated to be 22, based on the selector used for the purpose of this test.
+This is my first time creating a web crawler, and amazon is not a great site to be crawled by a bot. Crawlers often hit walls, at one point I was getting catpcha during my tries. The only success I had at one point is to get the links reported back from the homepage header. Scrapy is not the only cralwer I've tried and selenium is not the only framework, but no sucess on amazon. Another thing, based on the description of the task, I have a feeling that this task was written before the last redesign of amazon, because the “Shop By Department” is not a dropdown menu now.
