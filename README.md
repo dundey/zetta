@@ -46,10 +46,14 @@ To run the test:
 - Goes to amazon.com
 - Search for keyword "laptop"
 - Add all non-discounted items to cart from the first page of results
-- Count the amount of items added and items skipped
-- Check the added amount of items matches the items in cart
-- Check the items added and items skipped match the total items on page
-- Check the items in cart are in stock
+- Check on product page if item is in stock and verify item is not discounted
+- Count the amount of items added to cart and items skipped
+- Check the added amount of items to cart, matches the items in the cart
+- Check the items added and items skipped match the total items that should be on the first page of results
+- Check the items in cart are still in stock
 
 ### Notes
 
+Because the items on the page change with each search, the page is not refreshed until the last item is added. New tabs are used for each item being added to the cart.
+
+The total number of valid items is calculated to be 22, based on the selector used for the purpose of this test.
