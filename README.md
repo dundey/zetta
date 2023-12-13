@@ -53,13 +53,3 @@ To run the test:
 
 ### Notes
 
-Because the items on the page change with each search, the page is not refreshed until the last item is added. New tabs are used for each item being added to the cart.
-
-The total number of valid items is calculated to be 22, based on the selector used for the purpose of this test.
-
-Other forms of validation can be used, such as verifying that a specific item added to the cart matches its name or ID, rather than just counting the numbers. However, I've decided not to overcomplicate the task for now.
-
-I've added a validation step in the cart to look for out-of-stock items. This validation might not be entirely accurate, as I can't fully test it, becase an item typically can't be added if it's already out of stock. A more effective approach will be to add a validation when attempting to click the 'Add to Cart' button and skip the item if it's out of stock, which will result in a more valuable test.
-
-I didn't include a step at the end to check each cart item individually for discounts, as this adds excessive complexity. Moreover, if such a check is necessary, it might indicate an issue with the code. You can't reliably check if an item is discounted without opening its product page.
-
