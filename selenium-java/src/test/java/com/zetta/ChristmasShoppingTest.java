@@ -26,18 +26,18 @@ public class ChristmasShoppingTest {
     private WebDriverWait wait;
 
     /**
-     * Sets up the WebDriver and navigates to the base URL.
+     * Sets up the WebDriver and navigate to the homepage.
      */
     @BeforeMethod
     public void setup() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5)); // Global wait time set to 5 seconds to speed up the test
+        wait = new WebDriverWait(driver, Duration.ofSeconds(5)); // Global wait time set to 5 seconds to speed up the tests
         driver.get(BASE_URL);
     }
 
     /**
-     * Tests adding laptops to the cart on Amazon.
+     * Test for adding laptops to the cart on Amazon.
      */
     @Test
     public void addLaptopsToCart() {
@@ -115,7 +115,7 @@ public class ChristmasShoppingTest {
     }
 
     /**
-     * Switches to the new browser tab.
+     * Switch to new browser tab function.
      */
     private void switchToNewTab() {
         ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
@@ -123,7 +123,7 @@ public class ChristmasShoppingTest {
     }
 
     /**
-     * Tears down the WebDriver.
+     * Stop the WebDriver.
      */
     @AfterMethod
     public void tearDown() {
