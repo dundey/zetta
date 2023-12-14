@@ -8,10 +8,9 @@ This project uses Scrapy with Selenium, designed to crawl amazon.com and check i
 
 To run this project, you need the following:
 
-- Python 3.x**
-- Scrapy (The web scraping framework)
-- Selenium (Used to help scrappy interact with dynamic content)
-- Chrome web browser (for running the crawler)
+- Python 3.x**. Ensure latest Python is installed on your system. You can download it from [Python's website](https://www.python.org/downloads/).
+- Chrome web browser (for running the crawler). If needed, you can download it from [Chrome's website](www.google.com/chrome).
+
 
 ### Important Project Files
 
@@ -20,16 +19,13 @@ To run this project, you need the following:
 
 ### Setting Up the Project
 
-1. **Install Python**: Ensure latest Python is installed on your system. You can download it from [Python's website](https://www.python.org/downloads/).
+1. **Clone the Repository**: Clone this project to your local machine.
 
-2. **Clone the Repository**: Clone this project to your local machine.
-
-3. **Install Python requirements**: Install Scrapy and Selenium by running from the root folder:
+2. **Install Python requirements**: Install Scrapy and Selenium by running from the root folder:
 ```
 pip install -r requirements.txt
 ```
-4. **Install Chrome**: If needed, you can download it from [Chrome's website](www.google.com/chrome).
-
+3. **Install Chrome**:
 ### Running the crawler
 
 To run the crawler:
