@@ -2,7 +2,7 @@
 
 ## Crawler Python Project: Rudolph the crawler test
 
-This project is Scrapy with Selenium, designed to crawl amazon.com and check if all category links under Shop by Department are working.
+This project uses Scrapy with Selenium, designed to crawl amazon.com and check if all category links under Shop by Department are working.
 
 ### Prerequisites
 
@@ -40,14 +40,14 @@ To run the crawler:
 
 ### Overview of `rudolph_crawler.py`
 
-- Goes to amazon.com in headless mode, with a real looking user-agent to reduce the chance of being blocked
-- Sometimes Amazon will not load properly or break on interaction, and the crawler needs to be rerun
-- Amazon is a dynamic website and the crawler can't do anything alone, so we needed the help of a UI framework like Selenium
-- We use Selenium to click through the menus, so that the needed links will load in the DOM
-- The crawler, now aslo known as Rudolph, is happy to visit and check if all links are working
-- Unfortunatelly Amazon is not so welcoming and will often block Rudolph.
-- Rudolph is stuborn and will visit every one of the category links as per instructions, and will generate a report that includes link, title and status
-- Most of the status will return as 503, but some will go through with 200. Rudolph had tried different approaches for simulating more human like behavior, but Amazon is not so easy to fool.
+- Goes to amazon.com in headless mode, with a real-looking user-agent to reduce the chance of being blocked.
+- Sometimes Amazon will not load properly or break on interaction, and the crawler needs to be rerun.
+- Amazon is a dynamic website and the crawler can't do anything alone, so we needed the help of a UI framework like Selenium.
+- We use Selenium to click through the menus, so that the needed links will load in the DOM.
+- The crawler, now also known as Rudolph, is happy to visit and check if all links are working.
+- Unfortunately, Amazon is not so welcoming and will often block Rudolph.
+- Rudolph is stubborn and will visit every one of the category links as per instructions, and will generate a report that includes link, title, and status.
+- Most of the statuses will return as 503, but some will go through with 200. Rudolph has tried different approaches for simulating more human-like behavior, but Amazon is not so easy to fool.
 
 ### Notes
-I'm sure there is a way to get the correct codes for each URL, but this crawler is already passed the scope of "simple", and using a differnt IP address for each URL check, or loading each page in full with selenium is not very efficient.
+I'm sure there is a way to get the correct codes for each URL, but this crawler has already passed the scope of "simple", and using a different IP address for each URL check, or loading each page in full with Selenium, is not very efficient.
