@@ -5,7 +5,7 @@
 3 of the tasks have a separate branch:
 - Acceptance criteria implementation - `dv/selenium-java-task`
 - Simple Site Crawl - `dv/crawler-python-task`
-- API Test - `dv/TODO`
+- API Test - `dv/api-javascript-task`
 
 For the last task "Git Usage, Best Practices, and Submission Details", I have followed most of the criteria, but not everything is perfect. For example, I wouldn't use the main branch for a single README file, and then have completly different code in separate branches.
 
@@ -17,5 +17,5 @@ For the UI tests I would have prefered to use JavaScript/TypeScript and Cypress 
 ### dv/crawler-python-task
 The crawler gets help from Selenium as well, but Amazon has a lot of dynamic content and it needed a UI framework to go through some menus. While I would prefer to use JavaScript for everything, Python was a good choice for this task.
 
-### dv/TODO
-TODO
+### dv/api-javascript-task
+I have mostly used Java for API testing, but I've already used it in the Selenium task, plus JavaScript is reasonable for API testing.
