@@ -37,7 +37,7 @@ To run this project, you need the following:
 
 To run the test:
 
-1. Navigate to the project directory in your terminal or command prompt.
+1. Navigate to the project directory `selenium-java` in your terminal or command prompt.
 
 2. Run the command `mvn test`. This command will compile the project and execute the test in headed mode.
 
