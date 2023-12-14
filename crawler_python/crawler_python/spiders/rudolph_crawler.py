@@ -1,11 +1,13 @@
 import scrapy
 from scrapy.selector import Selector
+from urllib.parse import urljoin
+import requests
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.action_chains import ActionChains
-from selenium.common.exceptions import NoSuchElementException
 from datetime import datetime
 
 class RudolphCrawlerSpider(scrapy.Spider):
@@ -13,7 +15,9 @@ class RudolphCrawlerSpider(scrapy.Spider):
 
     def __init__(self):
         self.start_urls = ["https://www.amazon.com/"]
-        self.driver = webdriver.Chrome()
+        options = Options()
+        options.add_argument('--headless') # run the crawler in headless mode
+        self.driver = webdriver.Chrome(options=options) # Initialize the Chrome driver
         self.visited_links = []
 
     def parse(self, response):
@@ -31,49 +35,57 @@ class RudolphCrawlerSpider(scrapy.Spider):
         # Locate the 'Accessories & Supplies' element
         accessories_supplies_element = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//li/a[contains(text(), 'Accessories & Supplies')]")))
 
-        # Create an ActionChains object and move the cursor to the 'Accessories & Supplies' element
+        # Move the cursor to the 'Accessories & Supplies' element to trigger an additional event
         action = ActionChains(self.driver)
         action.move_to_element(accessories_supplies_element).perform()
 
-        # Click on the back to Main Menu button
-        WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="hmenu-content"]/ul[5]/li[1]/a/div'))).click()
+        # Click on the Back to Main Menu button
+        element = WebDriverWait(self.driver, 10).until(
+            EC.element_to_be_clickable((By.XPATH, '//*[@id="hmenu-content"]/ul[5]/li[1]/a/div'))
+        )
+        self.driver.execute_script("arguments[0].click();", element)
 
-            # Process each ul
+        # Iterate through the list elements
         for ul_number in range(5, 27):
-            ul_xpath = f'/html/body/div[3]/div[2]/div/ul[{ul_number}]/li[1]'
-            
-            try:
-                ul = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, ul_xpath)))
-                self.process_ul(ul)
-            except NoSuchElementException:
-                self.logger.info(f"No ul found at index {ul_number}")
+            ul_xpath = f'/html/body/div[3]/div[2]/div/ul[{ul_number}]'
+            ul_element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, ul_xpath)))
+            self.process_ul(ul_element)
 
-        # Writing results to file
-        self.write_results()
+        self.driver.quit()
 
     def process_ul(self, ul_element):
-        try:
-            ul_html = ul_element.get_attribute('outerHTML')
-            response = Selector(text=ul_html)
+        base_url = self.driver.current_url
+        ul_html = ul_element.get_attribute('outerHTML')
+        response = Selector(text=ul_html)
 
-            for li in response.xpath("//li[contains(@class, 'hmenu-item')]"):
-                link = li.xpath("./a/@href").get()
-                if link:
-                    full_link = response.urljoin(link)
-                    self.visited_links.append((full_link, self.get_title(full_link), "OK"))
-        except Exception as e:
-            self.logger.error(f"Error processing ul element: {e}")
+        # Extract the URL and title from the list
+        for li in response.xpath("//li"):
+            link_element = li.xpath("./a/@href").get()
+            title_element = li.xpath("./a/text()").get()
+            if link_element and title_element:
+                full_link = urljoin(base_url, link_element)
+                title = title_element.strip()
+                status = self.get_link_status(full_link)
+                self.visited_links.append((full_link, title, status))
 
-    def get_title(self, url):
+
+    def get_link_status(self, url):
+        # How to write the different status codes in the results file
         try:
-            self.driver.get(url)
-            WebDriverWait(self.driver, 20).until(lambda d: d.title != "")  # Wait for title to load
-            return self.driver.title
+            response = requests.get(url, allow_redirects=True, stream=True)
+            if response.status_code == 200:
+                return "OK"
+            elif response.status_code == 503:
+                return "Crawler Blocked"
+            else:
+                return "Dead link"
         except Exception as e:
             self.logger.error(f"Error visiting {url}: {str(e)}")
             return "Dead link"
 
+
     def write_results(self):
+        # Writing the results to a file
         timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
         results_file = f"{timestamp}_results.txt"
         with open(results_file, "w") as file:
@@ -81,5 +93,5 @@ class RudolphCrawlerSpider(scrapy.Spider):
                 file.write(f"{link}, {title}, {status}\n")
 
     def closed(self, reason):
-        self.driver.quit()
+        # Closing the crawler and saving the results
         self.write_results()

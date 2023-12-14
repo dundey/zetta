@@ -2,13 +2,13 @@
 
 ## Crawler Python Project: Rudolph the crawler test
 
-This project is Scrapy with Selenium, designed to crawl on amazon.com and check if all category links under Shop by Department are working.
+This project is Scrapy with Selenium, designed to crawl amazon.com and check if all category links under Shop by Department are working.
 
 ### Prerequisites
 
 To run this project, you need the following:
 
-- Python 3.x** (Python 3.9.6 is used in this project)
+- Python 3.x**
 - Scrapy (The web scraping framework)
 - Selenium (Used to help scrappy interact with dynamic content)
 - Chrome web browser (for running the crawler)
@@ -22,30 +22,32 @@ To run this project, you need the following:
 
 1. **Install Python**: Ensure latest Python is installed on your system. You can download it from [Python's website](https://www.python.org/downloads/).
 
-2. **Install Python requirements**: Install Scrapy and SElenium using
+2. **Clone the Repository**: Clone this project to your local machine.
+
+3. **Install Python requirements**: Install Scrapy and Selenium by running from the root folder:
 ```
 pip install -r requirements.txt
 ```
 4. **Install Chrome**: If needed, you can download it from [Chrome's website](www.google.com/chrome).
 
-3. **Clone the Repository**: Clone this project to your local machine.
-
 ### Running the crawler
 
 To run the crawler:
 
-1. Navigate to crawler_python/crawler_python in your terminal or command prompt.
+1. Navigate to folder crawler_python in your terminal.
 
-2. Run the command `scrapy crawl rudolph_crawler`. This command will run the crawler in headed mode.
+2. Run the command `scrapy crawl rudolph_crawler` to run the crawler.
 
 ### Overview of `rudolph_crawler.pu`
 
-- Goes to amazon.com, but amazon blocks crawlers so we fake the user-agent with a real looking one
-- Amazon is a dynamic website and the crawler can't do anything alone, so we needed the help or some UI framework like Selenium
-- We use selenium to click through the menus, so that the needed menus will load in the DOM
-- So far so good, but scrapy was never able to catch the links that I wanted
-- Scrapy fails his duties
+- Goes to amazon.com in headless mode, with a real looking user-agent to reduce the chance of being blocked
+- Sometimes Amazon will not load properly or break on interaction, and the crawler needs to be rerun
+- Amazon is a dynamic website and the crawler can't do anything alone, so we needed the help of a UI framework like Selenium
+- We use Selenium to click through the menus, so that the needed links will load in the DOM
+- The crawler, now aslo known as Rudolph, is happy to visit and check if all links are working
+- Unfortunatelly Amazon is not so welcoming and will often block Rudolph.
+- Rudolph is stuborn and will visit every one of the category links as per instructions, and will generate a report that includes link, title and status
+- Most of the status will return as 503, but some will go through with 200. Rudolph had tried different approaches for simulating more human like behavior, but Amazon is not so easy to fool.
 
 ### Notes
-
-This is my first time creating a web crawler, and amazon is not a great site to be crawled by a bot. Crawlers often hit walls, at one point I was getting catpcha during my tries. The only success I had at one point is to get the links reported back from the homepage header. Scrapy is not the only cralwer I've tried and selenium is not the only framework, but no sucess on amazon. Another thing, based on the description of the task, I have a feeling that this task was written before the last redesign of amazon, because the “Shop By Department” is not a dropdown menu now.
+I'm sure there is a way to get the correct codes for each URL, but this crawler is already passed the scope of "simple", and using a differnt IP address for each URL check, or loading each page in full with selenium is not very efficient.

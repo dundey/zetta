@@ -12,7 +12,7 @@ Pipfile.lock
 # Ignore logs and temporary files
 *.log
 *.tmp
-*.txt
+*_results.txt
 *~
 
 # Ignore IDE and editor-specific files
