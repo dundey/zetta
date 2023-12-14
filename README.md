@@ -38,7 +38,7 @@ To run the crawler:
 
 2. Run the command `scrapy crawl rudolph_crawler` to run the crawler.
 
-### Overview of `rudolph_crawler.pu`
+### Overview of `rudolph_crawler.py`
 
 - Goes to amazon.com in headless mode, with a real looking user-agent to reduce the chance of being blocked
 - Sometimes Amazon will not load properly or break on interaction, and the crawler needs to be rerun
