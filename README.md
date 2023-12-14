@@ -1,21 +1,31 @@
 # Zetta Technical Interview Task - QA Engineer
 
-## Overview of the tasks/projects
+## API JavaScript Project: Santa helper
 
-3 of the tasks have a separate branch:
-- Acceptance criteria implementation - `dv/selenium-java-task`
-- Simple Site Crawl - `dv/crawler-python-task`
-- API Test - `dv/api-javascript-task`
+This project consists of a suite of API tests written in JavaScript, designed to validate the functionality of a mock API endpoint simulating the retrieval of blog posts. It demonstrates the use of the popular JavaScript testing frameworks - Mocha and Chai.
 
-For the last task "Git Usage, Best Practices, and Submission Details", I have followed most of the criteria, but not everything is perfect. For example, I wouldn't use the main branch for a single README file, and then have completly different code in separate branches.
+### Prerequisites
 
-For divercity I have used Java, JavaScript and Python.
+To run this project, you need:
+- Node.js. If you don't have Node.js installed, you can download and install it from [Node.js official website](https://nodejs.org/en). This will also install npm (Node Package Manager), which is essential for managing the project's dependencies. 
 
-### dv/selenium-java-task
-For the UI tests I would have prefered to use JavaScript/TypeScript and Cypress or Playwright, even though with Cypress the approach would have been different, as you can't use multiple tabs there, the same I used them with Selenium. Maybe I had to index the dynamic results from the page, and then visit each URL and etc.
+### Important files
 
-### dv/crawler-python-task
-The crawler gets help from Selenium as well, but Amazon has a lot of dynamic content and it needed a UI framework to go through some menus. While I would prefer to use JavaScript for everything, Python was a good choice for this task.
+- `package.json`: This file is used by npm to manage the project's modules, scripts, and to identify the project and its dependencies.
+- `santaHelperTests.js`: This file contains the API test scenarios for the project.
 
-### dv/api-javascript-task
-I have mostly used Java for API testing, but I've already used it in the Selenium task, plus JavaScript is reasonable for API testing.
+### Setting Up the Project
+
+1. **Clone the Repository**: Clone this project to your local machine.
+
+2. **Install Dependencies**: Run `npm install` in the root folder
+
+### Running the Test
+
+To run the tests, run the command `npm test`.
+
+### Test Scenarios for `santaHelper.js`
+
+- Check that each of the 10 users has 10 posts
+- Check that each post has a unique ID
+- Count how many posts each user has
