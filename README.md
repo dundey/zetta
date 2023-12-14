@@ -2,20 +2,27 @@
 
 ## Overview of the tasks/projects
 
-3 of the tasks have a separate branch:
+Three of the tasks have their own separate branches:
 - Acceptance criteria implementation - `dv/selenium-java-task`
 - Simple Site Crawl - `dv/crawler-python-task`
 - API Test - `dv/api-javascript-task`
 
-For the last task "Git Usage, Best Practices, and Submission Details", I have followed most of the criteria, but not everything is perfect. For example, I wouldn't use the main branch for a single README file, and then have completly different code in separate branches.
+For the last task, "Git Usage, Best Practices, and Submission Details," I have followed most of the criteria, though not everything is perfect. For instance, I would not typically use the main branch for a single README file while having completely different code in separate branches.
 
-For divercity I have used Java, JavaScript and Python.
+To showcase diversity, I have used Java, JavaScript, and Python.
 
 ### dv/selenium-java-task
-For the UI tests I would have prefered to use JavaScript/TypeScript and Cypress or Playwright, even though with Cypress the approach would have been different, as you can't use multiple tabs there, the same I used them with Selenium. Maybe I had to index the dynamic results from the page, and then visit each URL and etc.
+
+For the UI tests, I would have preferred to use JavaScript/TypeScript with Cypress or Playwright. Although with Cypress, the approach would differ, as it does not support multiple tabs like Selenium does. Perhaps I could have indexed the dynamic results from the page, then visited each URL and so on.
 
 ### dv/crawler-python-task
-The crawler gets help from Selenium as well, but Amazon has a lot of dynamic content and it needed a UI framework to go through some menus. While I would prefer to use JavaScript for everything, Python was a good choice for this task.
+
+The crawler also utilizes Selenium, but Amazon's site has a lot of dynamic content which required a UI framework to navigate through some of the menus. While JavaScript would be my preferred choice for most tasks, Python was well-suited for this one.
 
 ### dv/api-javascript-task
-I have mostly used Java for API testing, but I've already used it in the Selenium task, plus JavaScript is reasonable for API testing.
+
+Although I have mainly used Java for API testing, I have used JavaScript for this task, as the Java slot was already occupied in the Selenium task.
+
+## Important note
+
+Thank you for taking your time to review my tasks!
